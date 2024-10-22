@@ -30,4 +30,4 @@ enum <tt>PlaceHolderBehaviour</tt>{<br>
 }<br>
 
 Если вам помогло моё решение - поставьте пожалуйста <tt>Звёздочку</tt>. Это будет лучшая благодарность для меня<br>
-<i>email для связи и предложений:</i> bondardanya10@gmai.com
+<i>email для связи и предложений:</i> bondardanya10@gmail.com
