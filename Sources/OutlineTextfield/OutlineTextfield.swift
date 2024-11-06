@@ -4,7 +4,7 @@ import Foundation
 import UIKit
 
 @available(iOS 13.0, *)
-public class OutlinedTextField: UITextField{
+public class OutlinedTextfield: UITextField{
     
     ///цвет обводки
     public var outlineColor: UIColor = .black { didSet { setNeedsDisplay() } }
