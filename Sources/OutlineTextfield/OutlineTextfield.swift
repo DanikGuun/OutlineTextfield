@@ -43,6 +43,7 @@ public class OutlinedTextfield: UITextField{
     private var outlineLayer = CAShapeLayer()
     private var placeholderLabel = UILabel()
     private var outlineStartStroke: CGFloat {
+        guard (self.placeholder ?? "").isEmpty == false else { return 0 }
         placeholderLabel.setNeedsLayout()
         placeholderLabel.layoutIfNeeded()
         return (placeholderLabel.bounds.width + (outlineLayer.path?.currentPoint.x ?? 0) - outlineCornerRadius + 6) / (outlineLayer.path?.length ?? 0)
