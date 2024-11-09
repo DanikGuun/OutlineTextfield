@@ -151,6 +151,18 @@ public class OutlinedTextfield: UITextField{
     
     
     //MARK: - Outline
+    
+    private func makeOutlined(animated: Bool = true){
+        UIView.animate(withDuration: animated ? 0.2 : 0, animations: { [unowned self] in
+            placeholderLabel.textColor = outlinedPlaceholderColor
+        })
+        placeholderLabel.font = outlinedPlaceholderFont
+        placeholderLabel.setNeedsLayout()
+        placeholderLabel.layoutIfNeeded()
+        if !isOutlined { resizeOutline(from: 0, to: outlineStartStroke) }
+        isOutlined = true
+        constraintPlaceholderToTop()
+    }
 
     private func resizeOutline(from start: CGFloat, to end: CGFloat){
         let anim = CABasicAnimation(keyPath: "strokeStart")
@@ -184,25 +196,21 @@ public class OutlinedTextfield: UITextField{
                 placeholderLabel.isHidden = false
             }
         }
-        
+        else{
+            if isOutlined == false{
+                makeOutlined(animated: false)
+            }
+        }
     }
     
     public override func becomeFirstResponder() -> Bool {
         let result = super.becomeFirstResponder()
         if placeholderBehavior == .floating, self.text?.isEmpty ?? true{
-            
-            UIView.animate(withDuration: 0.2, animations: { [unowned self] in
-                placeholderLabel.textColor = outlinedPlaceholderColor
-            })
-            placeholderLabel.font = outlinedPlaceholderFont
-            placeholderLabel.setNeedsLayout()
-            placeholderLabel.layoutIfNeeded()
-            if !isOutlined { resizeOutline(from: 0, to: outlineStartStroke) }
-            isOutlined = true
-            constraintPlaceholderToTop()
+            makeOutlined()
         }
         return result
     }
+    
     public override func resignFirstResponder() -> Bool {
         let result = super.resignFirstResponder()
         if placeholderBehavior == .floating, self.text?.isEmpty ?? false{
