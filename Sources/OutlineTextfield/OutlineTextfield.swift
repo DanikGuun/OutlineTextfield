@@ -61,6 +61,8 @@ public class OutlinedTextfield: UITextField{
         super.init(frame: frame)
         createPlaceHolderLabel()
         self.layer.addSublayer(outlineLayer)
+        
+        self.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
     }
     
     required init?(coder: NSCoder) {
@@ -188,7 +190,8 @@ public class OutlinedTextfield: UITextField{
         outlineLayer.path = newPath
     }
     //MARK: - TextField
-    private func textFieldDidChange() {
+    
+    @objc private func textFieldDidChange() {
         if placeholderBehavior == .hide{
             if let text = self.text, !text.isEmpty {
                 placeholderLabel.isHidden = true
